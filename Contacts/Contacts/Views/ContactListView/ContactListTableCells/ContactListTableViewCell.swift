@@ -9,7 +9,9 @@
 import UIKit
 
 class ContactListTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var contactListImageView: UIImageView!
+    @IBOutlet weak var favoriteIcon: UIImageView!
+    @IBOutlet weak var contactNameLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
