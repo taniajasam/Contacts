@@ -39,6 +39,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+" id="x0y-kW-yiB">
                             <color key="tintColor" red="0.31372549019607843" green="0.8901960784313725" blue="0.76078431372549016" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="didClickOnAddContactButton:" destination="CPm-2x-vOf" id="KQ7-yG-bcV"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -51,10 +54,10 @@
             </objects>
             <point key="canvasLocation" x="1691.304347826087" y="121.875"/>
         </scene>
-        <!--View Controller-->
+        <!--Contact Detail View Controller-->
         <scene sceneID="DIB-AU-bGM">
             <objects>
-                <viewController id="eLb-9e-mmc" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactDetailVC" id="eLb-9e-mmc" customClass="ContactDetailViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XZg-rw-q3Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,8 +72,8 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwv-sJ-G8E">
-                                        <rect key="frame" x="165" y="213" width="45" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="163" y="213" width="49.5" height="21.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -165,6 +168,7 @@
                                                             <constraint firstAttribute="width" constant="40" id="d4T-XU-gk0"/>
                                                         </constraints>
                                                         <state key="normal" image="favourite_button"/>
+                                                        <state key="selected" image="favourite_button_selected"/>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="favorite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xue-Kh-L3S">
                                                         <rect key="frame" x="14" y="51.5" width="43" height="14.5"/>
@@ -201,9 +205,13 @@
                                     <constraint firstAttribute="trailing" secondItem="l5u-sq-PeJ" secondAttribute="trailing" constant="127" id="xZ3-Wy-UYH"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R50-Ou-J3K">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R50-Ou-J3K">
                                 <rect key="frame" x="0.0" y="335" width="375" height="332"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="eLb-9e-mmc" id="j1q-Kt-dMc"/>
+                                    <outlet property="delegate" destination="eLb-9e-mmc" id="P4a-vg-CTw"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -218,15 +226,22 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qrN-nF-MMq"/>
                     </view>
+                    <connections>
+                        <outlet property="backgroundContainerView" destination="6os-YD-dp4" id="jbk-wh-4CO"/>
+                        <outlet property="contactDetailTableView" destination="R50-Ou-J3K" id="njn-Z2-7gj"/>
+                        <outlet property="contactFullNameLabel" destination="kwv-sJ-G8E" id="eea-8u-oPC"/>
+                        <outlet property="favoriteButton" destination="8bG-om-0NL" id="W44-jj-4gb"/>
+                        <outlet property="profileImageView" destination="l5u-sq-PeJ" id="vcX-jL-hki"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pVu-BE-yfZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2422" y="122"/>
+            <point key="canvasLocation" x="2421.5999999999999" y="121.88905547226388"/>
         </scene>
-        <!--View Controller-->
+        <!--Modify Contact Detail View Controller-->
         <scene sceneID="a9U-V4-Ovb">
             <objects>
-                <viewController id="e41-bS-obF" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ModifyContactDetailVC" id="e41-bS-obF" customClass="ModifyContactDetailViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gcx-dw-E0k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -335,6 +350,7 @@
         <image name="camera_button" width="41" height="41"/>
         <image name="email_button" width="45" height="44"/>
         <image name="favourite_button" width="44" height="44"/>
+        <image name="favourite_button_selected" width="44" height="44"/>
         <image name="message_button" width="44" height="44"/>
         <image name="placeholder_photo" width="126" height="126"/>
     </resources>

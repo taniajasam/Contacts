@@ -38,6 +38,12 @@ class ContactsViewController: UIViewController {
     func registerTableViewCells() {
         contactsTableView.register(UINib(nibName: AppConstants.ViewIdentifiers.contactListCell, bundle: nil), forCellReuseIdentifier: AppConstants.ViewIdentifiers.contactListCell)
     }
+    
+    @IBAction func didClickOnAddContactButton(_ sender: Any) {
+        let modifyContactDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: AppConstants.ViewIdentifiers.modifyDetailView) as? ModifyContactDetailViewController
+        modifyContactDetailVC?.modalPresentationStyle = .fullScreen
+        self.present(modifyContactDetailVC!, animated: true, completion: nil)
+    }
 }
 
 extension ContactsViewController : UITableViewDelegate, UITableViewDataSource {
@@ -74,5 +80,12 @@ extension ContactsViewController : UITableViewDelegate, UITableViewDataSource {
         return contactListCell!
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let contactList = contactsViewModel.contactsDict[contactsViewModel.contactKeys[indexPath.section]] {
+            let contactDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: AppConstants.ViewIdentifiers.contactDetailView) as? ContactDetailViewController
+            contactDetailVC?.contactDetailViewModel.contact = contactList[indexPath.row]
+            self.navigationController?.pushViewController(contactDetailVC!, animated: true)
+        }
+    }
     
 }

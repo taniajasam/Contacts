@@ -36,6 +36,28 @@ final class NetworkManager {
             }
         }
     }
+    
+    func getContactDetail(contactID: String, completion: @escaping (ContactDetailResponse?) -> ()) {
+        
+        guard let url = URL(string: AppConstants.API.contactDetail.replacingOccurrences(of: "{id}", with: contactID)) else {
+            return
+        }
+        webserviceHelper.fetchResponse(url: url, shouldCancelOtherOps: true) { (data, response, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+                completion(nil)
+            } else {
+                let jsonDecoder = JSONDecoder()
+                do {
+                    let contactDetail = try jsonDecoder.decode(ContactDetailResponse.self, from: data!)
+                    completion(contactDetail)
+                } catch {
+                    print("Error occured while parsing trending movies response")
+                    completion(nil)
+                }
+            }
+        }
+    }
 //    
 //    func getReviews(id: String, completion: @escaping () -> ()) {
 //        

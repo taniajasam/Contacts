@@ -10,6 +10,8 @@ import UIKit
 
 class ContactDetailTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var valueTextField: UITextField!
+    @IBOutlet weak var keyLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
