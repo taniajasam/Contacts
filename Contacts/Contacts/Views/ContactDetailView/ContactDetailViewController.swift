@@ -16,12 +16,14 @@ class ContactDetailViewController: UIViewController {
     @IBOutlet weak var contactDetailTableView: UITableView!
     @IBOutlet weak var favoriteButton: UIButton!
     var contactDetailViewModel = ContactDetailViewModel()
+    var isViewPrepared = false
+    
+//MARK: - LifeCycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerTableViewCells()
         customiseNavigationBar()
-        addGradientToBackgroundView()
         contactDetailViewModel.reloadView = {
             DispatchQueue.main.async { [weak self] in
                 self?.setContactDetails()
@@ -34,32 +36,35 @@ class ContactDetailViewController: UIViewController {
         contactDetailViewModel.fetchContactDetail()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        addGradientToBackgroundView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addGradientToBackgroundView()
+
+    }
+    
+//MARK: - Helper Methods
+    
     func customiseNavigationBar()  {
-        
-        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
         navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1)
 
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didClickOnEditButton))
         self.navigationItem.rightBarButtonItem  = editButtonItem
     }
     
-    @objc func didClickOnEditButton() {
-        let modifyContactDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: AppConstants.ViewIdentifiers.modifyDetailView) as? ModifyContactDetailViewController
-        modifyContactDetailVC?.contactViewMode = .edit
-        if let contactDetail = contactDetailViewModel.contactDetail {
-            modifyContactDetailVC?.modifyContactViewModel.contact = contactDetail
-        }
-        modifyContactDetailVC?.modalPresentationStyle = .fullScreen
-        self.present(modifyContactDetailVC!, animated: true, completion: nil)
-    }
-    
     func addGradientToBackgroundView()  {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = backgroundContainerView.frame
-        
-        gradientLayer.colors = [#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0).cgColor, #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.278119649).cgColor, #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.278119649).cgColor]
-        
-        backgroundContainerView.layer.addSublayer(gradientLayer)
+        if !isViewPrepared {
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = backgroundContainerView.frame
+            gradientLayer.colors = [#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0).cgColor, #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.278119649).cgColor, #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.278119649).cgColor]
+            backgroundContainerView.layer.addSublayer(gradientLayer)
+            isViewPrepared = true
+        }
     }
     
     func registerTableViewCells() {
@@ -74,8 +79,22 @@ class ContactDetailViewController: UIViewController {
         contactDetailTableView.reloadData()
     }
     
+
+//MARK: - Action Methods
     
+    @objc func didClickOnEditButton() {
+        let modifyContactDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: AppConstants.ViewIdentifiers.modifyDetailView) as? ModifyContactDetailViewController
+        modifyContactDetailVC?.contactViewMode = .edit
+        if let contactDetail = contactDetailViewModel.contactDetail {
+            modifyContactDetailVC?.modifyContactViewModel.contact = contactDetail
+        }
+        modifyContactDetailVC?.modalPresentationStyle = .fullScreen
+        self.present(modifyContactDetailVC!, animated: true, completion: nil)
+    }
+     
 }
+
+//MARK: - Delegate/DataSource Methods
 
 extension ContactDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -87,7 +106,7 @@ extension ContactDetailViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56
+        return CGFloat(AppConstants.Heights.contactInfoRow)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

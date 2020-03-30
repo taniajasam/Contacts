@@ -17,6 +17,8 @@ class ContactsViewController: UIViewController {
     @IBOutlet weak var contactsTableView: UITableView!
     private let contactsViewModel = ContactsViewModel()
     
+    //MARK: - LifeCycle Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,22 +45,16 @@ class ContactsViewController: UIViewController {
         contactsViewModel.fetchContactList()
     }
     
+//MARK: - Helper Methods
+
     func setupViews() {
         let font = UIFont.systemFont(ofSize: 20);
         addContactButton.setTitleTextAttributes([NSAttributedString.Key.font: font], for:.normal)
         contactsTableView.isHidden = true
-        
     }
     
     func registerTableViewCells() {
         contactsTableView.register(UINib(nibName: AppConstants.ViewIdentifiers.contactListCell, bundle: nil), forCellReuseIdentifier: AppConstants.ViewIdentifiers.contactListCell)
-    }
-    
-    @IBAction func didClickOnAddContactButton(_ sender: Any) {
-        let modifyContactDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: AppConstants.ViewIdentifiers.modifyDetailView) as? ModifyContactDetailViewController
-        modifyContactDetailVC?.contactViewMode = .add
-        modifyContactDetailVC?.modalPresentationStyle = .fullScreen
-        self.present(modifyContactDetailVC!, animated: true, completion: nil)
     }
     
     func showAlertVC(message: String) {
@@ -69,7 +65,19 @@ class ContactsViewController: UIViewController {
         alertVC.addAction(okAction)
         self.present(alertVC, animated: false, completion: nil)
     }
+
+//MARK: - Actions
+    
+    @IBAction func didClickOnAddContactButton(_ sender: Any) {
+        let modifyContactDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: AppConstants.ViewIdentifiers.modifyDetailView) as? ModifyContactDetailViewController
+        modifyContactDetailVC?.contactViewMode = .add
+        modifyContactDetailVC?.modalPresentationStyle = .fullScreen
+        self.present(modifyContactDetailVC!, animated: true, completion: nil)
+    }
+    
 }
+
+//MARK: - Delegate/DataSource Methods
 
 extension ContactsViewController : UITableViewDelegate, UITableViewDataSource {
     
@@ -83,11 +91,11 @@ extension ContactsViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return CGFloat(AppConstants.Heights.contactSectionHeader)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64
+        return CGFloat(AppConstants.Heights.contactListRow)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

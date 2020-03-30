@@ -82,6 +82,7 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo" translatesAutoresizingMaskIntoConstraints="NO" id="l5u-sq-PeJ">
                                         <rect key="frame" x="127" y="84" width="121" height="121"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="l5u-sq-PeJ" secondAttribute="height" multiplier="1:1" id="2S6-Zm-iaS"/>
                                         </constraints>
@@ -91,6 +92,9 @@
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                        </variation>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6xP-Im-8OD">
                                         <rect key="frame" x="44" y="253" width="287" height="70"/>
@@ -101,8 +105,12 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHw-Te-VpX">
                                                         <rect key="frame" x="16" y="8" width="40" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="08y-C3-b5j"/>
-                                                            <constraint firstAttribute="width" constant="40" id="oQq-yb-hba"/>
+                                                            <constraint firstAttribute="height" constant="40" id="08y-C3-b5j">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                            </constraint>
+                                                            <constraint firstAttribute="width" constant="40" id="oQq-yb-hba">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                            </constraint>
                                                         </constraints>
                                                         <state key="normal" image="message_button"/>
                                                     </button>
@@ -111,6 +119,9 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -127,8 +138,12 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0K-2A-1ex">
                                                         <rect key="frame" x="15.5" y="8" width="40" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="E9S-LY-ePz"/>
-                                                            <constraint firstAttribute="height" constant="40" id="oA1-7a-1RT"/>
+                                                            <constraint firstAttribute="width" constant="40" id="E9S-LY-ePz">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                            </constraint>
+                                                            <constraint firstAttribute="height" constant="40" id="oA1-7a-1RT">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                            </constraint>
                                                         </constraints>
                                                         <state key="normal" image="call_button"/>
                                                     </button>
@@ -137,6 +152,9 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -153,8 +171,12 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjd-AI-Rbg">
                                                         <rect key="frame" x="16" y="8" width="40" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="2AD-hx-XFa"/>
-                                                            <constraint firstAttribute="width" constant="40" id="eHP-B5-qhi"/>
+                                                            <constraint firstAttribute="height" constant="40" id="2AD-hx-XFa">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                            </constraint>
+                                                            <constraint firstAttribute="width" constant="40" id="eHP-B5-qhi">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                            </constraint>
                                                         </constraints>
                                                         <state key="normal" image="email_button"/>
                                                     </button>
@@ -163,6 +185,9 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -179,8 +204,12 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8bG-om-0NL">
                                                         <rect key="frame" x="15.5" y="8" width="40" height="40"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="CEO-Ab-ahM"/>
-                                                            <constraint firstAttribute="width" constant="40" id="d4T-XU-gk0"/>
+                                                            <constraint firstAttribute="height" constant="40" id="CEO-Ab-ahM">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                            </constraint>
+                                                            <constraint firstAttribute="width" constant="40" id="d4T-XU-gk0">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                                            </constraint>
                                                         </constraints>
                                                         <state key="normal" image="favourite_button"/>
                                                         <state key="selected" image="favourite_button_selected"/>
@@ -190,6 +219,9 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        </variation>
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -203,21 +235,29 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="70" id="g7i-gg-bDM"/>
+                                            <constraint firstAttribute="height" constant="70" id="g7i-gg-bDM">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="90"/>
+                                            </constraint>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="6xP-Im-8OD" firstAttribute="leading" secondItem="6os-YD-dp4" secondAttribute="leading" constant="44" id="Os9-v5-kr2"/>
-                                    <constraint firstAttribute="height" constant="335" id="R3i-DE-EPv"/>
+                                    <constraint firstAttribute="height" constant="335" id="R3i-DE-EPv">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="540"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" secondItem="6xP-Im-8OD" secondAttribute="trailing" constant="44" id="UIn-5p-qOx"/>
                                     <constraint firstAttribute="bottom" secondItem="6xP-Im-8OD" secondAttribute="bottom" constant="12" id="Wgw-ty-XMb"/>
-                                    <constraint firstItem="l5u-sq-PeJ" firstAttribute="leading" secondItem="6os-YD-dp4" secondAttribute="leading" constant="127" id="WvK-CX-ll2"/>
+                                    <constraint firstItem="l5u-sq-PeJ" firstAttribute="leading" secondItem="6os-YD-dp4" secondAttribute="leading" constant="127" id="WvK-CX-ll2">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="280"/>
+                                    </constraint>
                                     <constraint firstItem="kwv-sJ-G8E" firstAttribute="top" secondItem="l5u-sq-PeJ" secondAttribute="bottom" constant="8" id="qlW-sr-NG2"/>
                                     <constraint firstItem="kwv-sJ-G8E" firstAttribute="centerX" secondItem="6os-YD-dp4" secondAttribute="centerX" id="uIn-X4-r1U"/>
                                     <constraint firstItem="l5u-sq-PeJ" firstAttribute="top" secondItem="6os-YD-dp4" secondAttribute="top" constant="84" id="xHY-HA-eFJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="l5u-sq-PeJ" secondAttribute="trailing" constant="127" id="xZ3-Wy-UYH"/>
+                                    <constraint firstAttribute="trailing" secondItem="l5u-sq-PeJ" secondAttribute="trailing" constant="127" id="xZ3-Wy-UYH">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="280"/>
+                                    </constraint>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R50-Ou-J3K">
@@ -293,6 +333,7 @@
                                     <constraint firstAttribute="height" constant="58" id="24u-AY-q4u"/>
                                     <constraint firstItem="DNW-Lf-CZ7" firstAttribute="centerY" secondItem="Zag-NW-Imr" secondAttribute="centerY" id="62a-mf-qyD"/>
                                     <constraint firstItem="04K-GU-DE1" firstAttribute="leading" secondItem="Zag-NW-Imr" secondAttribute="leading" constant="8" id="6Tv-dB-VCs"/>
+                                    <constraint firstItem="DNW-Lf-CZ7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="04K-GU-DE1" secondAttribute="trailing" constant="8" symbolic="YES" id="Akf-hC-zqz"/>
                                     <constraint firstItem="04K-GU-DE1" firstAttribute="centerY" secondItem="Zag-NW-Imr" secondAttribute="centerY" id="JYP-rx-QmF"/>
                                     <constraint firstAttribute="trailing" secondItem="DNW-Lf-CZ7" secondAttribute="trailing" constant="8" id="TVS-2j-qhB"/>
                                 </constraints>
@@ -302,7 +343,7 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder_photo" translatesAutoresizingMaskIntoConstraints="NO" id="au5-oj-YDe">
                                         <rect key="frame" x="127" y="39.5" width="121" height="121"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="au5-oj-YDe" secondAttribute="height" multiplier="1:1" id="7X0-cT-Koj"/>
                                         </constraints>
@@ -310,8 +351,12 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2HB-3I-J2d">
                                         <rect key="frame" x="208" y="120.5" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="9R3-ZA-nNV"/>
-                                            <constraint firstAttribute="height" constant="40" id="eVp-5d-F3K"/>
+                                            <constraint firstAttribute="width" constant="40" id="9R3-ZA-nNV">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="90"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="40" id="eVp-5d-F3K">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="90"/>
+                                            </constraint>
                                         </constraints>
                                         <state key="normal" image="camera_button"/>
                                         <connections>
@@ -321,11 +366,17 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstItem="au5-oj-YDe" firstAttribute="leading" secondItem="WLg-7i-VNP" secondAttribute="leading" constant="127" id="0uK-Yg-1PG"/>
-                                    <constraint firstAttribute="height" constant="200" id="399-mM-aQ2"/>
+                                    <constraint firstItem="au5-oj-YDe" firstAttribute="leading" secondItem="WLg-7i-VNP" secondAttribute="leading" constant="127" id="0uK-Yg-1PG">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="280"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="200" id="399-mM-aQ2">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="400"/>
+                                    </constraint>
                                     <constraint firstItem="2HB-3I-J2d" firstAttribute="trailing" secondItem="au5-oj-YDe" secondAttribute="trailing" id="Ac0-LK-IWw"/>
                                     <constraint firstItem="au5-oj-YDe" firstAttribute="centerY" secondItem="WLg-7i-VNP" secondAttribute="centerY" id="FXc-D4-YUW"/>
-                                    <constraint firstAttribute="trailing" secondItem="au5-oj-YDe" secondAttribute="trailing" constant="127" id="LFD-I8-wvN"/>
+                                    <constraint firstAttribute="trailing" secondItem="au5-oj-YDe" secondAttribute="trailing" constant="127" id="LFD-I8-wvN">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="280"/>
+                                    </constraint>
                                     <constraint firstItem="2HB-3I-J2d" firstAttribute="bottom" secondItem="au5-oj-YDe" secondAttribute="bottom" id="MOm-3u-GEP"/>
                                 </constraints>
                             </view>

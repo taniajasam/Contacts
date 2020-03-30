@@ -19,17 +19,25 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eat-Wg-ge8">
                         <rect key="frame" x="24" y="21.5" width="80" height="19.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="IJ5-eo-TPH"/>
+                            <constraint firstAttribute="width" constant="80" id="IJ5-eo-TPH">
+                                <variation key="heightClass=regular-widthClass=regular" constant="140"/>
+                            </constraint>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        </variation>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="43P-5B-XuQ">
                         <rect key="frame" x="136" y="21" width="238" height="20"/>
                         <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits"/>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        </variation>
                         <connections>
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="HQ4-RP-w7j"/>
                         </connections>
@@ -39,7 +47,9 @@
                 <constraints>
                     <constraint firstItem="eat-Wg-ge8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="E0F-ck-1PZ"/>
                     <constraint firstItem="43P-5B-XuQ" firstAttribute="leading" secondItem="eat-Wg-ge8" secondAttribute="trailing" constant="32" id="JF1-Ef-8Yz"/>
-                    <constraint firstItem="eat-Wg-ge8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Mbm-Xp-1kP"/>
+                    <constraint firstItem="eat-Wg-ge8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="24" id="Mbm-Xp-1kP">
+                        <variation key="heightClass=regular-widthClass=regular" constant="36"/>
+                    </constraint>
                     <constraint firstAttribute="trailing" secondItem="43P-5B-XuQ" secondAttribute="trailing" constant="16" id="Rha-VC-zvd"/>
                     <constraint firstItem="43P-5B-XuQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ld1-uf-L5b"/>
                 </constraints>

@@ -19,12 +19,12 @@ class ModifyContactDetailViewController: UIViewController {
     var contactViewMode: ContactUpdateViewMode?
     var imagePickerController: UIImagePickerController?
     var modifyContactViewModel = ModifyContactDetailViewModel()
+    var isViewPrepared = false
+    
+//MARK: - LifeCycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.view.addGestureRecognizer(tapGesture)
-        profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2
         if contactViewMode == .edit {
             updateProfilePic()
         }
@@ -34,41 +34,91 @@ class ModifyContactDetailViewController: UIViewController {
                     self?.dismiss(animated: true, completion: nil)
                 }
             } else {
-                //TODO: show alert
+                DispatchQueue.main.async { [weak self] in
+                    self?.showAlertWithMessage(message: "Something went wrong")
+                }
             }
         }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        addGradientToBackgroundView()
+        addTapGesture()
+        addKeyboardObservers()
         registerTableViewCells()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        addGradientToBackgroundView()
+    }
     
-    @objc func dismissKeyboard() {
-           self.view.endEditing(true)
-       }
+//MARK: - Helper Methods
+    
+    func addTapGesture()  {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    func addKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
     func updateProfilePic() {
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2
+        
         if let contact = modifyContactViewModel.contact {
             profileImageView.kf.setImage(with: URL(string: AppConstants.API.imageBasePath + (contact.profile_pic ?? "")))
         }
     }
     
     func addGradientToBackgroundView()  {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = backgroundContainerView.frame
-        
-        gradientLayer.colors = [#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0).cgColor,#colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.278119649).cgColor, #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.2833369008).cgColor]
-        
-        backgroundContainerView.layer.addSublayer(gradientLayer)
+        if !isViewPrepared {
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = backgroundContainerView.frame
+            gradientLayer.colors = [#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0).cgColor,#colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.278119649).cgColor, #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.2833369008).cgColor]
+            backgroundContainerView.layer.addSublayer(gradientLayer)
+            isViewPrepared = true
+        }
     }
     
     func registerTableViewCells()  {
         modifyContactTableView.register(UINib(nibName: AppConstants.ViewIdentifiers.contactDetailCell, bundle: nil), forCellReuseIdentifier: AppConstants.ViewIdentifiers.contactDetailCell)
         modifyContactTableView.tableFooterView = UIView()
+    }
+
+    func isInputValid(key: String, value: String) -> Bool {
+        if value.count == 0 {
+            showAlertWithMessage(message: "\(key) can't be empty.")
+        } else if key == "Phone Number" {
+            if Helper.isValidEmail(value) {
+                return true
+            } else {
+                showAlertWithMessage(message: "Invalid Email")
+            }
+        } else if key == "Email" {
+            if Helper.validatePhone(value: value) {
+                return true
+            } else {
+                showAlertWithMessage(message: "Invalid Phone Number")
+            }
+        } else {
+            return true
+        }
+        return false
+    }
+    
+    func showAlertWithMessage(message: String)  {
+        let alertController = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true) {
+        }
+    }
+
+    
+//MARK: - Action Methods
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -129,8 +179,7 @@ class ModifyContactDetailViewController: UIViewController {
         }
         params["favorite"] = false
         if contactViewMode == .add {
-                    modifyContactViewModel.addContactDetail(params: params)
-
+            modifyContactViewModel.addContactDetail(params: params)
         } else {
             modifyContactViewModel.updateContactDetail(params: params)
         }
@@ -140,35 +189,9 @@ class ModifyContactDetailViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func isInputValid(key: String, value: String) -> Bool {
-        if value.count == 0 {
-            showAlertWithMessage(message: "\(key) can't be empty.")
-        } else if key == "Phone Number" {
-            if Helper.isValidEmail(value) {
-                return true
-            } else {
-                showAlertWithMessage(message: "Invalid Email")
-            }
-        } else if key == "Email" {
-            if Helper.validatePhone(value: value) {
-                return true
-            } else {
-                showAlertWithMessage(message: "Invalid Phone Number")
-            }
-        } else {
-            return true
-        }
-        return false
-    }
-    
-    func showAlertWithMessage(message: String)  {
-        let alertController = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true) {
-        }
-    }
 }
+
+// MARK: - Delegate/DataSource Methods
 
 extension ModifyContactDetailViewController: UITableViewDelegate, UITableViewDataSource {
     

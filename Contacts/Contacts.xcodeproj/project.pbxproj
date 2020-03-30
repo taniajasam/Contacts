@@ -28,6 +28,8 @@
 		2064145A2431D8F0001A9AAE /* ModifyContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206414592431D8F0001A9AAE /* ModifyContactViewModel.swift */; };
 		2064145F2431F8B6001A9AAE /* UpdatedContactResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2064145E2431F8B6001A9AAE /* UpdatedContactResponse.swift */; };
 		206414612432032A001A9AAE /* HelperClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206414602432032A001A9AAE /* HelperClass.swift */; };
+		2064146424321D22001A9AAE /* URLSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2064146324321D22001A9AAE /* URLSessionMock.swift */; };
+		2064146624321E38001A9AAE /* Contacts.json in Resources */ = {isa = PBXBuildFile; fileRef = 2064146524321E38001A9AAE /* Contacts.json */; };
 		206980932430FE3F0031C25E /* ContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206980922430FE3F0031C25E /* ContactDetailViewController.swift */; };
 		20698095243107FC0031C25E /* ContactDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20698094243107FC0031C25E /* ContactDetailViewModel.swift */; };
 		20FA1E2624311C81004FFBD2 /* ModifyContactDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FA1E2524311C81004FFBD2 /* ModifyContactDetailViewController.swift */; };
@@ -72,6 +74,8 @@
 		206414592431D8F0001A9AAE /* ModifyContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyContactViewModel.swift; sourceTree = "<group>"; };
 		2064145E2431F8B6001A9AAE /* UpdatedContactResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatedContactResponse.swift; sourceTree = "<group>"; };
 		206414602432032A001A9AAE /* HelperClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperClass.swift; sourceTree = "<group>"; };
+		2064146324321D22001A9AAE /* URLSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionMock.swift; sourceTree = "<group>"; };
+		2064146524321E38001A9AAE /* Contacts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Contacts.json; sourceTree = "<group>"; };
 		206980922430FE3F0031C25E /* ContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewController.swift; sourceTree = "<group>"; };
 		20698094243107FC0031C25E /* ContactDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailViewModel.swift; sourceTree = "<group>"; };
 		20FA1E2524311C81004FFBD2 /* ModifyContactDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyContactDetailViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 		203376E52430B71900BA2F1A /* ContactsTests */ = {
 			isa = PBXGroup;
 			children = (
+				2064146524321E38001A9AAE /* Contacts.json */,
 				203376E62430B71900BA2F1A /* ContactsTests.swift */,
 				203376E82430B71900BA2F1A /* Info.plist */,
 			);
@@ -244,6 +249,7 @@
 			children = (
 				2033770E2430E2A300BA2F1A /* AppConstants.swift */,
 				206414602432032A001A9AAE /* HelperClass.swift */,
+				2064146324321D22001A9AAE /* URLSessionMock.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -406,6 +412,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2064146624321E38001A9AAE /* Contacts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +499,7 @@
 				203376F52430DA6000BA2F1A /* ContactListTableViewCell.swift in Sources */,
 				203376FA2430DBC700BA2F1A /* ContactDetailTableViewCell.swift in Sources */,
 				206980932430FE3F0031C25E /* ContactDetailViewController.swift in Sources */,
+				2064146424321D22001A9AAE /* URLSessionMock.swift in Sources */,
 				206414612432032A001A9AAE /* HelperClass.swift in Sources */,
 				203377012430DFFD00BA2F1A /* ContactsResponse.swift in Sources */,
 				203376D02430B71800BA2F1A /* AppDelegate.swift in Sources */,

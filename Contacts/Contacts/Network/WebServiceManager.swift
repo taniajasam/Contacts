@@ -11,6 +11,7 @@ import Foundation
 class WebserviceHelper {
     
     private let queue = OperationQueue()
+    var session: ContactsURLSession = URLSession(configuration: .default)
     
     func fetchResponse(url: URL, method: String,params:[String:Any]? = nil, shouldCancelOtherOps: Bool, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         
@@ -27,12 +28,12 @@ class WebserviceHelper {
             request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         }
         
-        let fetchOperation = BlockOperation {
-            let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let fetchOperation = BlockOperation { [weak self] in
+            let dataTask = self?.session.dataTask(with: request) { (data, response, error) in
             completion(data, response, error)
             }
             
-            dataTask.resume()
+            dataTask?.resume()
         }
         queue.addOperation(fetchOperation)
     }

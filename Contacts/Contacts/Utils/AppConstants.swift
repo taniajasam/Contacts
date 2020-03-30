@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct AppConstants {
     struct API {
@@ -24,6 +25,12 @@ struct AppConstants {
         static let contactDetailView   = "ContactDetailVC"
         static let contactDetailCell   = "ContactDetailTableViewCell"
         static let modifyDetailView    = "ModifyContactDetailVC"
+    }
+    
+    struct Heights {
+        static let contactListRow       = UIDevice.current.userInterfaceIdiom == .pad ? 75 : 64
+        static let contactSectionHeader = UIDevice.current.userInterfaceIdiom == .pad ? 60 : 30
+        static let contactInfoRow       = UIDevice.current.userInterfaceIdiom == .pad ? 70 : 56
     }
 }
 
