@@ -22,6 +22,8 @@ class ModifyContactDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
         profileImageView.layer.cornerRadius = profileImageView.frame.size.height/2
         if contactViewMode == .edit {
             updateProfilePic()
@@ -43,6 +45,11 @@ class ModifyContactDetailViewController: UIViewController {
         addGradientToBackgroundView()
         registerTableViewCells()
     }
+    
+    
+    @objc func dismissKeyboard() {
+           self.view.endEditing(true)
+       }
     
     func updateProfilePic() {
         if let contact = modifyContactViewModel.contact {
