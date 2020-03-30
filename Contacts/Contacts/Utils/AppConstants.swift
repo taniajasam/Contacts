@@ -14,7 +14,7 @@ struct AppConstants {
         static let contacts           = "http://gojek-contacts-app.herokuapp.com/contacts.json"
         static let imageBasePath            = "http://gojek-contacts-app.herokuapp.com"
         static let contactDetail                  = "http://gojek-contacts-app.herokuapp.com/contacts/{id}.json"
-        static let credits                  = "https://api.themoviedb.org/3/movie/{id}/credits"
+        static let addContactDetail                  = "http://gojek-contacts-app.herokuapp.com/contacts.json"
         static let posterSize               = "w342"
         
     }
@@ -25,4 +25,9 @@ struct AppConstants {
         static let contactDetailCell   = "ContactDetailTableViewCell"
         static let modifyDetailView    = "ModifyContactDetailVC"
     }
+}
+
+enum ContactUpdateViewMode {
+    case add
+    case edit
 }

@@ -12,16 +12,25 @@ class WebserviceHelper {
     
     private let queue = OperationQueue()
     
-    func fetchResponse(url: URL, shouldCancelOtherOps: Bool, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+    func fetchResponse(url: URL, method: String,params:[String:Any]? = nil, shouldCancelOtherOps: Bool, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         
         if shouldCancelOtherOps {
             queue.cancelAllOperations()
         }
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        
+        if let parameters = params, method == "POST" || method == "PUT" {
+            if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: []) {
+                request.httpBody = jsonData
+            }
+        }
         
         let fetchOperation = BlockOperation {
-            let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                completion(data, response, error)
+            let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            completion(data, response, error)
             }
+            
             dataTask.resume()
         }
         queue.addOperation(fetchOperation)

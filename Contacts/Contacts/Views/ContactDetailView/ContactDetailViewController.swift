@@ -9,7 +9,7 @@
 import UIKit
 
 class ContactDetailViewController: UIViewController {
-
+    
     @IBOutlet weak var backgroundContainerView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var contactFullNameLabel: UILabel!
@@ -20,8 +20,7 @@ class ContactDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerTableViewCells()
-        navigationController?.navigationBar.barTintColor = .white
-
+        customiseNavigationBar()
         addGradientToBackgroundView()
         contactDetailViewModel.reloadView = {
             DispatchQueue.main.async { [weak self] in
@@ -31,11 +30,27 @@ class ContactDetailViewController: UIViewController {
         contactDetailViewModel.fetchContactDetail()
     }
     
+    func customiseNavigationBar()  {
+        navigationController?.navigationBar.barTintColor = .white
+        let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didClickOnEditButton))
+        self.navigationItem.rightBarButtonItem  = editButtonItem
+    }
+    
+    @objc func didClickOnEditButton() {
+        let modifyContactDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: AppConstants.ViewIdentifiers.modifyDetailView) as? ModifyContactDetailViewController
+        modifyContactDetailVC?.contactViewMode = .edit
+        if let contactDetail = contactDetailViewModel.contactDetail {
+            modifyContactDetailVC?.modifyContactViewModel.contact = contactDetail
+        }
+        modifyContactDetailVC?.modalPresentationStyle = .fullScreen
+        self.present(modifyContactDetailVC!, animated: true, completion: nil)
+    }
+    
     func addGradientToBackgroundView()  {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = backgroundContainerView.frame
         
-        gradientLayer.colors = [#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0).cgColor, #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.278119649).cgColor]
+        gradientLayer.colors = [#colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 0).cgColor, #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.278119649).cgColor, #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 0.278119649).cgColor]
         
         backgroundContainerView.layer.addSublayer(gradientLayer)
     }
@@ -52,7 +67,7 @@ class ContactDetailViewController: UIViewController {
         contactDetailTableView.reloadData()
     }
     
-
+    
 }
 
 extension ContactDetailViewController: UITableViewDataSource, UITableViewDelegate {
@@ -77,8 +92,8 @@ extension ContactDetailViewController: UITableViewDataSource, UITableViewDelegat
             contactDetailCell?.valueTextField.text = contactDetailViewModel.contactDetail?.phone_number
             
         case 1:
-        contactDetailCell?.keyLabel.text = "email"
-        contactDetailCell?.valueTextField.text = contactDetailViewModel.contactDetail?.email
+            contactDetailCell?.keyLabel.text = "email"
+            contactDetailCell?.valueTextField.text = contactDetailViewModel.contactDetail?.email
         default:
             return contactDetailCell!
         }

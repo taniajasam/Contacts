@@ -20,7 +20,7 @@ final class NetworkManager {
         guard let url = URL(string: AppConstants.API.contacts) else {
             return
         }
-        webserviceHelper.fetchResponse(url: url, shouldCancelOtherOps: true) { (data, response, error) in
+        webserviceHelper.fetchResponse(url: url, method: "GET", shouldCancelOtherOps: true) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "")
                 completion(nil)
@@ -42,7 +42,7 @@ final class NetworkManager {
         guard let url = URL(string: AppConstants.API.contactDetail.replacingOccurrences(of: "{id}", with: contactID)) else {
             return
         }
-        webserviceHelper.fetchResponse(url: url, shouldCancelOtherOps: true) { (data, response, error) in
+        webserviceHelper.fetchResponse(url: url, method: "GET", shouldCancelOtherOps: true) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "")
                 completion(nil)
@@ -58,6 +58,29 @@ final class NetworkManager {
             }
         }
     }
+    
+    func addContactDetail(params: [String:Any], completion: @escaping (AddDetailsResponse?) -> ()) {
+        
+        guard let url = URL(string: AppConstants.API.addContactDetail) else {
+            return
+        }
+        webserviceHelper.fetchResponse(url: url, method: "POST", shouldCancelOtherOps: true) { (data, response, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+                completion(nil)
+            } else {
+                let jsonDecoder = JSONDecoder()
+                do {
+                    let updatedContactResponse = try jsonDecoder.decode(AddDetailsResponse.self, from: data!)
+                    completion(updatedContactResponse)
+                } catch {
+                    print("Error occured while parsing trending movies response")
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
 //    
 //    func getReviews(id: String, completion: @escaping () -> ()) {
 //        

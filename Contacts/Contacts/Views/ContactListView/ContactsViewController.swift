@@ -41,6 +41,7 @@ class ContactsViewController: UIViewController {
     
     @IBAction func didClickOnAddContactButton(_ sender: Any) {
         let modifyContactDetailVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: AppConstants.ViewIdentifiers.modifyDetailView) as? ModifyContactDetailViewController
+        modifyContactDetailVC?.contactViewMode = .add
         modifyContactDetailVC?.modalPresentationStyle = .fullScreen
         self.present(modifyContactDetailVC!, animated: true, completion: nil)
     }
@@ -67,6 +68,10 @@ extension ContactsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return contactsViewModel.contactKeys[section]
+    }
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return contactsViewModel.contactKeys
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
