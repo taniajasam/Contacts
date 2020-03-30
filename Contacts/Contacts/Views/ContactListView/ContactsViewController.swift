@@ -11,6 +11,7 @@ import Kingfisher
 
 class ContactsViewController: UIViewController {
     
+    @IBOutlet weak var contactsFetchActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var groupsButton: UIBarButtonItem!
     @IBOutlet weak var addContactButton: UIBarButtonItem!
     @IBOutlet weak var contactsTableView: UITableView!
@@ -19,20 +20,34 @@ class ContactsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        contactsViewModel.reloadTableData = {
-            DispatchQueue.main.async { [weak self] in
-                self?.contactsTableView.reloadData()
+        contactsViewModel.reloadTableData = { (isOperationSuccessful, message) in
+            if isOperationSuccessful {
+                DispatchQueue.main.async { [weak self] in
+                    self?.contactsFetchActivityIndicator.stopAnimating()
+                    self?.contactsTableView.isHidden = false
+                    self?.contactsTableView.reloadData()
+                }
+            } else {
+                DispatchQueue.main.async { [weak self] in
+                    self?.showAlertVC(message: message ?? "")
+                }
             }
         }
         
-        setCustomViews()
-        contactsViewModel.fetchContactList()
+        setupViews()
         registerTableViewCells()
     }
     
-    func setCustomViews() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        contactsViewModel.fetchContactList()
+    }
+    
+    func setupViews() {
         let font = UIFont.systemFont(ofSize: 20);
-    addContactButton.setTitleTextAttributes([NSAttributedString.Key.font: font], for:.normal)
+        addContactButton.setTitleTextAttributes([NSAttributedString.Key.font: font], for:.normal)
+        contactsTableView.isHidden = true
+        
     }
     
     func registerTableViewCells() {
@@ -44,6 +59,15 @@ class ContactsViewController: UIViewController {
         modifyContactDetailVC?.contactViewMode = .add
         modifyContactDetailVC?.modalPresentationStyle = .fullScreen
         self.present(modifyContactDetailVC!, animated: true, completion: nil)
+    }
+    
+    func showAlertVC(message: String) {
+        let alertVC = UIAlertController(title: "Operation Failed", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in
+            
+        }
+        alertVC.addAction(okAction)
+        self.present(alertVC, animated: false, completion: nil)
     }
 }
 
@@ -72,6 +96,14 @@ extension ContactsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return contactsViewModel.contactKeys
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let contactList = contactsViewModel.contactsDict[contactsViewModel.contactKeys[indexPath.section]] {
+                contactsViewModel.deleteContact(id: "\(contactList[indexPath.row].id ?? 0)")
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

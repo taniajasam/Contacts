@@ -15,6 +15,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="E2e-ka-ncS">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <color key="color" red="0.31372549020000001" green="0.89019607840000003" blue="0.76078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fetching contacts from server..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1R-RT-Hkk">
+                                <rect key="frame" x="66" y="367.5" width="243" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lgz-eT-qhV">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -28,8 +38,12 @@
                         <constraints>
                             <constraint firstItem="UXt-Cb-E2Z" firstAttribute="bottom" secondItem="lgz-eT-qhV" secondAttribute="bottom" id="8HL-7a-f0y"/>
                             <constraint firstItem="UXt-Cb-E2Z" firstAttribute="trailing" secondItem="lgz-eT-qhV" secondAttribute="trailing" id="90h-96-Tbj"/>
+                            <constraint firstItem="A1R-RT-Hkk" firstAttribute="centerX" secondItem="v47-vp-Xld" secondAttribute="centerX" id="NTY-Pl-kkN"/>
+                            <constraint firstItem="A1R-RT-Hkk" firstAttribute="top" secondItem="E2e-ka-ncS" secondAttribute="bottom" constant="24" id="aFj-Zk-sqV"/>
                             <constraint firstItem="lgz-eT-qhV" firstAttribute="leading" secondItem="UXt-Cb-E2Z" secondAttribute="leading" id="d6y-hu-1hc"/>
                             <constraint firstItem="lgz-eT-qhV" firstAttribute="top" secondItem="UXt-Cb-E2Z" secondAttribute="top" id="eRl-dd-wE7"/>
+                            <constraint firstItem="E2e-ka-ncS" firstAttribute="centerX" secondItem="v47-vp-Xld" secondAttribute="centerX" id="tYh-2l-GNS"/>
+                            <constraint firstItem="E2e-ka-ncS" firstAttribute="centerY" secondItem="v47-vp-Xld" secondAttribute="centerY" id="vce-Bv-y80"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UXt-Cb-E2Z"/>
                     </view>
@@ -46,6 +60,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addContactButton" destination="x0y-kW-yiB" id="s0q-vS-Xch"/>
+                        <outlet property="contactsFetchActivityIndicator" destination="E2e-ka-ncS" id="Rp4-oe-xBA"/>
                         <outlet property="contactsTableView" destination="lgz-eT-qhV" id="Vow-mx-r6N"/>
                         <outlet property="groupsButton" destination="k7n-qP-LXv" id="ym0-Nb-OR7"/>
                     </connections>

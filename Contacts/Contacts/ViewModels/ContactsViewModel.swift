@@ -15,15 +15,18 @@ class ContactsViewModel {
     var contactKeys = [String]() {
         didSet {
             if let reloadBlock = self.reloadTableData {
-                reloadBlock()
+                if contactKeys.count == 0 {
+                    reloadBlock(false, "Data not available")
+                }
+                reloadBlock(true, nil)
             }
         }
     }
     
-    var reloadTableData : (() -> Void)? = nil
+    var reloadTableData : ((Bool, String?) -> Void)? = nil
     
     func fetchContactList()  {
-        weak var weakself = self
+        weak var weakSelf = self
         
         NetworkManager.shared.getContacts { (contactResponse) in
             
@@ -32,16 +35,32 @@ class ContactsViewModel {
                 for contact in contacts {
                     let prefix = String(contact.first_name!.prefix(1).uppercased())
                     if keys.contains(prefix) {
-                        weakself?.contactsDict[prefix]!.append(contact)
+                        weakSelf?.contactsDict[prefix]!.append(contact)
                     } else {
-                        weakself?.contactsDict[prefix] = [contact]
+                        weakSelf?.contactsDict[prefix] = [contact]
                         keys.append(prefix)
                     }
                 }
-                weakself?.contactKeys = keys.sorted()
+                weakSelf?.contactKeys = keys.sorted()
+            } else {
+                if let reloadBlock = weakSelf?.reloadTableData {
+                    reloadBlock(false, "Data not available")
+                }
             }
         }
     }
     
+    func deleteContact(id: String) {
+        weak var weakSelf = self
+        NetworkManager.shared.deleteContact(contactId: id) { (isDeletedSuccesfully) in
+            if isDeletedSuccesfully {
+                weakSelf?.fetchContactList()
+            } else {
+                if let reloadBlock = weakSelf?.reloadTableData {
+                    reloadBlock(isDeletedSuccesfully, "Something went wrong while deleting the contact")
+                }
+            }
+        }
+    }
     
 }

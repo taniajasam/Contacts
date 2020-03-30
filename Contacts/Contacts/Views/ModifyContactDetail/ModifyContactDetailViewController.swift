@@ -121,7 +121,12 @@ class ModifyContactDetailViewController: UIViewController {
             }
         }
         params["favorite"] = false
-        modifyContactViewModel.addContactDetail(params: params)
+        if contactViewMode == .add {
+                    modifyContactViewModel.addContactDetail(params: params)
+
+        } else {
+            modifyContactViewModel.updateContactDetail(params: params)
+        }
     }
     
     @IBAction func didClickOnCancelButton(_ sender: Any) {
@@ -130,15 +135,31 @@ class ModifyContactDetailViewController: UIViewController {
     
     func isInputValid(key: String, value: String) -> Bool {
         if value.count == 0 {
-            let alertController = UIAlertController(title: "Invalid input", message: "\(key) can't be empty.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true) {
+            showAlertWithMessage(message: "\(key) can't be empty.")
+        } else if key == "Phone Number" {
+            if Helper.isValidEmail(value) {
+                return true
+            } else {
+                showAlertWithMessage(message: "Invalid Email")
+            }
+        } else if key == "Email" {
+            if Helper.validatePhone(value: value) {
+                return true
+            } else {
+                showAlertWithMessage(message: "Invalid Phone Number")
             }
         } else {
             return true
         }
         return false
+    }
+    
+    func showAlertWithMessage(message: String)  {
+        let alertController = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true) {
+        }
     }
 }
 
@@ -157,16 +178,20 @@ extension ModifyContactDetailViewController: UITableViewDelegate, UITableViewDat
         switch indexPath.row {
         case 0:
             modifyContactTableCell?.keyLabel.text = "First Name"
+            modifyContactTableCell?.valueTextField.placeholder = "Enter First Name"
             modifyContactTableCell?.valueTextField.text = contactViewMode == .add ? "" : modifyContactViewModel.contact?.first_name
         case 1:
             modifyContactTableCell?.keyLabel.text = "Last Name"
+            modifyContactTableCell?.valueTextField.placeholder = "Enter Last Name"
             modifyContactTableCell?.valueTextField.text = contactViewMode == .add ? "" : modifyContactViewModel.contact?.last_name
         case 2:
             modifyContactTableCell?.keyLabel.text = "mobile"
+            modifyContactTableCell?.valueTextField.placeholder = "Enter mobile"
             modifyContactTableCell?.valueTextField.keyboardType = .phonePad
             modifyContactTableCell?.valueTextField.text = contactViewMode == .add ? "" : modifyContactViewModel.contact?.phone_number
         case 3:
             modifyContactTableCell?.keyLabel.text = "email"
+            modifyContactTableCell?.valueTextField.placeholder = "Enter email"
             modifyContactTableCell?.valueTextField.keyboardType = .emailAddress
             modifyContactTableCell?.valueTextField.text = contactViewMode == .add ? "" : modifyContactViewModel.contact?.email
         default:

@@ -24,6 +24,7 @@ class WebserviceHelper {
             if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: []) {
                 request.httpBody = jsonData
             }
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         }
         
         let fetchOperation = BlockOperation {

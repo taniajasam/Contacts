@@ -27,11 +27,18 @@ class ContactDetailViewController: UIViewController {
                 self?.setContactDetails()
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         contactDetailViewModel.fetchContactDetail()
     }
     
     func customiseNavigationBar()  {
+        
         navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.3599199653, green: 0.9019572735, blue: 0.804747045, alpha: 1)
+
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didClickOnEditButton))
         self.navigationItem.rightBarButtonItem  = editButtonItem
     }

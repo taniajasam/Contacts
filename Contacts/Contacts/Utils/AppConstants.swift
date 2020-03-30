@@ -11,12 +11,12 @@ import Foundation
 struct AppConstants {
     struct API {
        
-        static let contacts           = "http://gojek-contacts-app.herokuapp.com/contacts.json"
-        static let imageBasePath            = "http://gojek-contacts-app.herokuapp.com"
-        static let contactDetail                  = "http://gojek-contacts-app.herokuapp.com/contacts/{id}.json"
-        static let addContactDetail                  = "http://gojek-contacts-app.herokuapp.com/contacts.json"
-        static let posterSize               = "w342"
-        
+        static let contacts             = "http://gojek-contacts-app.herokuapp.com/contacts.json"
+        static let imageBasePath        = "http://gojek-contacts-app.herokuapp.com"
+        static let contactDetail        = "http://gojek-contacts-app.herokuapp.com/contacts/{id}.json"
+        static let addContactDetail     = "http://gojek-contacts-app.herokuapp.com/contacts.json"
+        static let updateContactDetail  = "http://gojek-contacts-app.herokuapp.com/contacts/{id}.json"
+        static let deleteContact        = "http://gojek-contacts-app.herokuapp.com/contacts/{id}.json"
     }
     
     struct ViewIdentifiers {

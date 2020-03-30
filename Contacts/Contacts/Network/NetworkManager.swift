@@ -30,7 +30,7 @@ final class NetworkManager {
                     let contactsResponse = try jsonDecoder.decode([ContactsResponse].self, from: data!)
                     completion(contactsResponse)
                 } catch {
-                    print("Error occured while parsing trending movies response")
+                    print("Error occured while parsing")
                     completion(nil)
                 }
             }
@@ -52,7 +52,7 @@ final class NetworkManager {
                     let contactDetail = try jsonDecoder.decode(ContactDetailResponse.self, from: data!)
                     completion(contactDetail)
                 } catch {
-                    print("Error occured while parsing trending movies response")
+                    print("Error occured while parsing")
                     completion(nil)
                 }
             }
@@ -64,53 +64,60 @@ final class NetworkManager {
         guard let url = URL(string: AppConstants.API.addContactDetail) else {
             return
         }
-        webserviceHelper.fetchResponse(url: url, method: "POST", shouldCancelOtherOps: true) { (data, response, error) in
+        webserviceHelper.fetchResponse(url: url, method: "POST", params: params, shouldCancelOtherOps: true) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "")
                 completion(nil)
             } else {
                 let jsonDecoder = JSONDecoder()
                 do {
+                    
                     let updatedContactResponse = try jsonDecoder.decode(AddDetailsResponse.self, from: data!)
                     completion(updatedContactResponse)
                 } catch {
-                    print("Error occured while parsing trending movies response")
+                    print("Error occured while parsing")
                     completion(nil)
                 }
             }
         }
     }
     
-//    
-//    func getReviews(id: String, completion: @escaping () -> ()) {
-//        
-//    }
-//    
-//    func getCast(id: String, completion: @escaping (CastResponse?) -> ()) {
-//        guard let url = addQueryParams(urlString: AppConstants.API.credits.replacingOccurrences(of: "{id}", with: id), params: [URLQueryItem(name: "api_key", value: AppConstants.API.key)]) else {
-//            return
-//        }
-//        
-//        webserviceHelper.fetchResponse(url: url, shouldCancelOtherOps: false) { (data, response, error) in
-//            if error != nil {
-//                print(error?.localizedDescription ?? "")
-//                completion(nil)
-//            } else {
-//                let jsonDecoder = JSONDecoder()
-//                do {
-//                    let castResponse = try jsonDecoder.decode(CastResponse.self, from: data!)
-//                    completion(castResponse)
-//                } catch {
-//                    print("Error occured while parsing trending movies response")
-//                    completion(nil)
-//                }
-//            }
-//        }
-//    }
-//    
-//    func addQueryParams(urlString: String, params: [URLQueryItem]) -> URL? {
-//        var urlComponents = URLComponents(string: urlString)
-//        urlComponents?.queryItems = params
-//        return urlComponents?.url
-//    }
+    func updateContactDetails(params: [String:Any], contactID: String, completion: @escaping (UpdatedContactResponse?) -> ()) {
+        
+        guard let url = URL(string: AppConstants.API.updateContactDetail.replacingOccurrences(of: "{id}", with: contactID)) else {
+            return
+        }
+        webserviceHelper.fetchResponse(url: url, method: "PUT", params: params, shouldCancelOtherOps: true) { (data, response, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+                completion(nil)
+            } else {
+                let jsonDecoder = JSONDecoder()
+                do {
+                    let updatedContact = try jsonDecoder.decode(UpdatedContactResponse.self, from: data!)
+                    completion(updatedContact)
+                } catch {
+                    print("Error occured while parsing")
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
+    func deleteContact(contactId: String, completion: @escaping (Bool) -> ()) {
+        
+        guard let url = URL(string: AppConstants.API.deleteContact.replacingOccurrences(of: "{id}", with: contactId)) else {
+            return
+        }
+        webserviceHelper.fetchResponse(url: url, method: "DELETE", shouldCancelOtherOps: true) { (data, response, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "")
+                completion(false)
+            } else {
+                if let httpResponse = response as? HTTPURLResponse {
+                    (httpResponse.statusCode == 204 || httpResponse.statusCode == 200) ? completion(true) : completion(false)
+                }
+            }
+        }
+    }
 }
